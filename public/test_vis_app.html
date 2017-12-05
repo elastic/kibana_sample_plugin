@@ -1,0 +1,13 @@
+<div class="test-vis-app app-container" ng-controller="TestVisApp">
+  <div class="test-vis-app-selector">
+    <select
+      ng-options="item.id as item.title for item in visualizationList"
+      ng-model="selectedVisualization"
+    ></select>
+  </div>
+  <div class="test-vis-app-visualize"></div>
+  <div class="test-vis-app-visualization">
+    <visualization vis="myVis" vis-data="myVisData"></visualization>
+    <visualization ng-if="myVis2" vis="myVis2" vis-data="myVisData2"></visualization>
+  </div>
+</div>
