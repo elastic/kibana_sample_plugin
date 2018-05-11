@@ -19,67 +19,67 @@ app.controller('TestVisApp', function ($scope, Private, serviceSettings) {
 
   const visContainer = $('.test-vis-app-visualize');
   const timeRange = {
-    min: 'now-7d/d',
-    max: 'now'
+    from: 'now-7d/d',
+    to: 'now'
   };
 
   $scope.$watch('selectedVisualization', (visualizationId) => {
     if (!visualizationId) return;
     visualizeLoader.embedVisualizationWithId(visContainer, visualizationId, {
-      timeRange: timeRange
+      timeRange: timeRange,
     });
   });
 
   // using kibana visualizations
-  $scope.myVisData = {
-    tables: [{
-      columns: [
-        { title: 'Tag' },
-        { title: 'Count' }
-      ],
-      rows: [
-        [ 'test', 100 ],
-        [ 'tag', 150 ],
-        [ 'for', 200 ],
-        [ 'tagcloud', 10 ],
-      ]
-    }]
-  };
-
-  const visConfig = {
-    type: 'tagcloud'
-  };
-
-  const Vis = Private(VisProvider);
-  $scope.myVis = new Vis('logstash-*', visConfig);
-
-
-  // region map
-  serviceSettings.getFileLayers()
-    .then(function (layersFromService) {
-      $scope.myVisData2 = {
-        tables: [{
-          columns: [
-            { title: 'Tag' },
-            { title: 'Count' }
-          ],
-          rows: [
-            [ 'GB', 100 ],
-            [ 'FR', 150 ],
-            [ 'DE', 200 ],
-            [ 'ES', 10 ],
-          ]
-        }]
-      };
-
-      const visConfig2 = {
-        type: 'region_map',
-        params: {
-          selectedLayer: layersFromService[1],
-          selectedJoinField:layersFromService[1].fields[0]
-        }
-      };
-
-      $scope.myVis2 = new Vis('.logstash*', visConfig2);
-    });
+  // $scope.myVisData = {
+  //   tables: [{
+  //     columns: [
+  //       { title: 'Tag' },
+  //       { title: 'Count' }
+  //     ],
+  //     rows: [
+  //       [ 'test', 100 ],
+  //       [ 'tag', 150 ],
+  //       [ 'for', 200 ],
+  //       [ 'tagcloud', 10 ],
+  //     ]
+  //   }]
+  // };
+  //
+  // const visConfig = {
+  //   type: 'tagcloud'
+  // };
+  //
+  // const Vis = Private(VisProvider);
+  // $scope.myVis = new Vis('logstash-*', visConfig);
+  //
+  //
+  // // region map
+  // serviceSettings.getFileLayers()
+  //   .then(function (layersFromService) {
+  //     $scope.myVisData2 = {
+  //       tables: [{
+  //         columns: [
+  //           { title: 'Tag' },
+  //           { title: 'Count' }
+  //         ],
+  //         rows: [
+  //           [ 'GB', 100 ],
+  //           [ 'FR', 150 ],
+  //           [ 'DE', 200 ],
+  //           [ 'ES', 10 ],
+  //         ]
+  //       }]
+  //     };
+  //
+  //     const visConfig2 = {
+  //       type: 'region_map',
+  //       params: {
+  //         selectedLayer: layersFromService[1],
+  //         selectedJoinField:layersFromService[1].fields[0]
+  //       }
+  //     };
+  //
+  //     $scope.myVis2 = new Vis('.logstash*', visConfig2);
+  //   });
 });

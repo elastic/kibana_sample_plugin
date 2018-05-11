@@ -1,12 +1,23 @@
 require('ui/autoload/all');
-require('ui/routes').enable();
-require('ui/chrome');
+
+// import the uiExports that we want to "use"
+import 'uiExports/visTypes';
+import 'uiExports/visResponseHandlers';
+import 'uiExports/visRequestHandlers';
+import 'uiExports/visEditorTypes';
+import 'uiExports/savedObjectTypes';
+import 'uiExports/spyModes';
+import 'uiExports/fieldFormats';
+
 import './test_vis_app.less';
 import './test_vis_app_controller.js';
 
-const app = require('ui/modules').get('apps/kibana_sample_plugin', []);
+import chrome from 'ui/chrome';
 
-require('ui/routes').when('/', {
-  template: require('./test_vis_app.html'),
-  reloadOnSearch: false,
-});
+import uiRoutes from 'ui/routes';
+import template from './test_vis_app.html';
+
+const app = require('ui/modules').get('apps/kibana_sample_plugin', ['kibana']);
+
+chrome.setRootTemplate(template);
+
