@@ -7,6 +7,15 @@ export default function (kibana) {
         title: 'Test Visualize',
         description: 'This is a sample plugin to test using existing kibana visualizations',
         main: 'plugins/kibana_sample_plugin/test_vis_app',
+        uses: [  // these are needed if you need to show exiting kibana visualizations
+          'visTypes',
+          'visResponseHandlers',
+          'visRequestHandlers',
+          'visEditorTypes',
+          'savedObjectTypes',
+          'spyModes',
+          'fieldFormats',
+        ],
       }
     },
     init(server) {
