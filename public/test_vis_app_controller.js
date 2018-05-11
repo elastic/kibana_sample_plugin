@@ -19,14 +19,14 @@ app.controller('TestVisApp', function ($scope, Private, serviceSettings) {
 
   const visContainer = $('.test-vis-app-visualize');
   const timeRange = {
-    min: 'now-7d/d',
-    max: 'now'
+    from: 'now-7d/d',
+    to: 'now'
   };
 
   $scope.$watch('selectedVisualization', (visualizationId) => {
     if (!visualizationId) return;
     visualizeLoader.embedVisualizationWithId(visContainer, visualizationId, {
-      timeRange: timeRange
+      timeRange: timeRange,
     });
   });
 
@@ -72,11 +72,12 @@ app.controller('TestVisApp', function ($scope, Private, serviceSettings) {
         }]
       };
 
+      console.log(layersFromService);
       const visConfig2 = {
         type: 'region_map',
         params: {
-          selectedLayer: layersFromService[1],
-          selectedJoinField:layersFromService[1].fields[0]
+          selectedLayer: layersFromService[0],
+          selectedJoinField:layersFromService[0].fields[0]
         }
       };
 
